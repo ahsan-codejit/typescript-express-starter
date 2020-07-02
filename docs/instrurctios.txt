@@ -6,6 +6,7 @@ npx tsc --init --rootDir src --outDir build \
 --esModuleInterop --resolveJsonModule --lib es6 \
 --module commonjs --allowJs true --noImplicitAny true
 
+#Nodemon and ts-node
 npm install --save-dev ts-node nodemon
 add in package.json-> "start:dev": "nodemon",
 
@@ -18,7 +19,7 @@ touch src/index.ts
 
 npx tsc
 
-Eslint
+#Eslint
 npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
 add .eslintrc
 add .eslintignore
@@ -42,3 +43,7 @@ in package.json-> "prettier-watch": "onchange 'src/**/*.ts' -- prettier --write 
 configure prettier with eslint
 npm install --save-dev eslint-config-prettier eslint-plugin-prettier
 adjust .eslintrc
+
+#Jest
+npm install --save-dev ts-jest jest @types/jest
+to generate jest config -> npx ts-jest config:init
