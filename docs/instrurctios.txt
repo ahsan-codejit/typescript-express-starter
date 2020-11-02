@@ -47,3 +47,6 @@ adjust .eslintrc
 #Jest
 npm install --save-dev ts-jest jest @types/jest
 to generate jest config -> npx ts-jest config:init
+
+#Express
+npm install --save-dev express body-parser @types/express
