@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
-
+import tokenGenerator from '../common/services/tokenGenerator';
 import { userType } from '../common/types/datatypes';
 class AuthController {
     private users: userType[];
@@ -19,13 +18,9 @@ class AuthController {
         let refreshToken: string;
         if (loggedUser) {
             //accessToken
-            const accessTokenSecret: string = process.env.ACCESS_TOKEN_SECRET!;
-            const accessTokenLife: string = process.env.ACCESS_TOKEN_LIFE + 'h';
-            accessToken = jwt.sign(loggedUser, accessTokenSecret, { expiresIn: accessTokenLife, algorithm: 'HS256' });
+            accessToken = tokenGenerator.getAccessToken(loggedUser);
             //refreshToken
-            const refreshTokenSecret: string = process.env.REFRESH_TOKEN_SECRET!;
-            const refreshTokenLife: string = process.env.REFRESH_TOKEN_LIFE + 'h';
-            refreshToken = jwt.sign(loggedUser, refreshTokenSecret, { expiresIn: refreshTokenLife, algorithm: 'HS256' });
+            refreshToken = tokenGenerator.getRefreshToken(loggedUser);
         } else {
             return res.status(401).json({ message: 'incorrect username/password' });
         }
