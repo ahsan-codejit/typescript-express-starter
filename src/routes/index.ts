@@ -1,9 +1,14 @@
-import express from "express";
+import { Application, Request, Response } from "express";
 import todo from './todo';
+import auth from './auth';
 
-export default function routes(app: express.Application) {
-    app.get('/', (req: express.Request, res: express.Response) => {
-        res.json({ "body": "Hello Boilerplate" });
+export default function routes(app: Application) {
+    auth.route(app);
+    todo.route(app);
+    app.get('/api', (req: Request, res: Response) => {
+        res.status(200).json({});
     });
-    todo(app);
+    app.get('*', (req: Request, res: Response) => {
+        res.status(404).json({ "message": "PageNotFound" });
+    });
 }
